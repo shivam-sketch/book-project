@@ -1,34 +1,46 @@
-import { HTTP_UNAUTHORIZED } from "../../config/HttpCodes.js";
+import { HTTP_FORBIDDEN, HTTP_UNAUTHORIZED } from "../config/HttpCodes.js";
 import jwt from "jsonwebtoken";
+import HttpResponse from "../utils/apiResponses/HttpResponse.js";
 
-const verifyToken = (req, res, next) => {
-    if (req?.headers && req?.headers?.authorization) {
-        jwt.verify(
-            req.headers.authorization,
-            process.env.SECRET_KEY,
-            function (err, decode) {
-                console.log("decode ", decode);
-                if (err) {
-                    res.status(HTTP_UNAUTHORIZED).send({
-                        status: HTTP_UNAUTHORIZED,
-                        data: {},
-                        message: "Unauthorize",
-                    });
-                } else {
-                    // console.log('decode', decode)
-                    req.user = decode;
-                    next();
-                }
-            }
-        );
-    } else {
-        res.status(HTTP_UNAUTHORIZED).send({
-            status: HTTP_UNAUTHORIZED,
-            data: {},
-            message: "Unauthorize",
-        });
-
+const auth = (roles = []) => {
+  return (req, res, next) => {
+    if (!req.header("Authorization")) {
+      return HttpResponse.sendAPIResponse(
+        res,
+        {},
+        HTTP_UNAUTHORIZED,
+        "Access denied, no token provided."
+      );
     }
+    const token = req.header("Authorization")?.replace("Bearer ", "");
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, function (err, decode) {
+        console.log("decode ", decode);
+        if (err) {
+          return HttpResponse.sendAPIResponse(
+            res,
+            {},
+            HTTP_UNAUTHORIZED,
+            "Unauthorize,Token Expired"
+          );
+        } else {
+          // console.log('decode', decode)
+          req.user = decode.user;
+
+          if (roles.length && !roles.includes(req.user.role)) {
+            return HttpResponse.sendAPIResponse(
+              res,
+              {},
+              HTTP_FORBIDDEN,
+              "Sorry! You Are Not Authorized For This Action"
+            );
+          }
+
+          next();
+        }
+      });
+    }
+  };
 };
 
-export default verifyToken
+export default auth;

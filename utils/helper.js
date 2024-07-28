@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt'
-import { ValidationError } from '../exceptions/app-exceptions.js';
+import bcrypt from "bcrypt";
+import { ValidationError } from "../exceptions/app-exceptions.js";
 
 const pick = (object, keys) => {
   return keys.reduce((obj, key) => {
@@ -10,10 +10,9 @@ const pick = (object, keys) => {
   }, {});
 };
 
-
 // check is valid password
 const isValidPassword = (value, helpers) => {
-  console.log('valueeeeeeeeeeeeeeee', value)
+  console.log("valueeeeeeeeeeeeeeee", value);
 
   if (
     value.length < 8 ||
@@ -22,28 +21,11 @@ const isValidPassword = (value, helpers) => {
     !/[!@#$%^&*()\-=_+{};':",.<>/?[\]\\|]/.test(value)
   ) {
     return helpers.message(
-      'Password must include atleast one lowercase letter, one uppercase letter, one number and one special character and must be atleast 8 characters long'
+      "Password must include atleast one lowercase letter, one uppercase letter, one number and one special character and must be atleast 8 characters long"
     );
   }
-  return value
+  return value;
 };
-
-
-
-const communityValidator = (value, helpers) => {
-
-  if (value && value != '#') {
-
-    return value
-  }
-  return helpers.message(
-    'please select valid community '
-  );
-
-
-}
-
-
 
 // Check is valid object id
 const isValidObjectId = (value, helpers) => {
@@ -53,26 +35,18 @@ const isValidObjectId = (value, helpers) => {
   return value;
 };
 
-
 const emailValidator = (value) => {
-
-  return value
-
-}
-
-
+  return value;
+};
 
 const passwordHasher = async (password, saltRound = 10) => {
   try {
-
-    let hashedPassword = await bcrypt.hash(password, saltRound)
-    return hashedPassword
+    let hashedPassword = await bcrypt.hash(password, saltRound);
+    return hashedPassword;
   } catch (error) {
-    throw new ValidationError("password not hashed!")
+    throw new ValidationError("password not hashed!");
   }
-
-}
-
+};
 
 async function generatePassword() {
   var length = 8,
@@ -82,15 +56,14 @@ async function generatePassword() {
     retVal += charset.charAt(Math.floor(Math.random() * n));
   }
 
-
-  return retVal + '@';
+  return retVal + "@";
 }
 
-
-
-
-
-
-
-
-export { pick, isValidPassword, isValidObjectId, emailValidator, passwordHasher, communityValidator, generatePassword }
+export {
+  pick,
+  isValidPassword,
+  isValidObjectId,
+  emailValidator,
+  passwordHasher,
+  generatePassword,
+};

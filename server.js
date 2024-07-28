@@ -12,10 +12,9 @@ import debug from "debug";
 import createHttpError from "http-errors";
 const analyze = debug("backend:server");
 
-// user App router
+//App router
 import authRouter from "./routes/api/v1/auth.js";
 import bookRouter from "./routes/api/v1/book.js";
-
 
 import HttpExceptionHandler from "./exceptions/HttpExceptionHandler.js";
 
@@ -35,7 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || "5000");
+var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 var server = http.createServer(app);
@@ -61,7 +60,12 @@ server.on("error", onError);
 server.on("listening", onListening);
 
 app.get("/", async (req, res) => {
-  res.status(200).json({ status: true, message: "add /api/v1 to the url" });
+  res
+    .status(200)
+    .json({
+      status: true,
+      message: "Server Is Running Now Add /api/v1 to the url",
+    });
 });
 
 app.get("/api/v1", async (req, res) => {
@@ -72,7 +76,6 @@ app.get("/api/v1", async (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/book", bookRouter);
-
 
 /**
  * Normalize a port into a number, string, or false.
