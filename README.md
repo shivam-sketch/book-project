@@ -8,10 +8,8 @@ A Node.js and Express.js based API for managing books with role-based authentica
 - [Installation](#installation)
 - [Usage](#usage)
 - [Endpoints](#endpoints)
-- [Authentication](#authentication)
 - [Swagger Documentation](#swagger-documentation)
-- [Environment Variables](#environment-variables)
-- [License](#license)
+
 
 ## Installation
 
@@ -29,7 +27,7 @@ A Node.js and Express.js based API for managing books with role-based authentica
 3. Set up environment variables:
     Create a `.env` file in the root directory and add the following:
     ```env
-    PRODUCTION_URL=https://book-project-kfdqk5tby-shivam-jains-projects-11466454.vercel.app/api/v1
+    PRODUCTION_URL=https://book-project-b97u.onrender.com/api/v1/
     PORT=3000
     JWT_SECRET=BOOKAUTHORREADER
     MONGODB_URI=mongodb+srv://test_project:ShivamDB2601@cluster0.3nfqkym.mongodb.net/books?retryWrites=true&w=majority&appName=Cluster0
@@ -48,3 +46,24 @@ A Node.js and Express.js based API for managing books with role-based authentica
 To start the server, run:
 ```bash
 npm start
+```
+
+## Endpoints
+
+Auth
+POST /api/auth/register: Register a new user
+POST /api/auth/login: Login a user and obtain a JWT token
+Books
+POST /api/books: Add a new book (Admin, Author)
+GET /api/books: Get all books (Admin, Author, Reader)
+GET /api/books/{id}: Get a book by ID (Admin, Author, Reader)
+PUT /api/books/{id}: Update a book (Admin, Author)
+DELETE /api/books/{id}: Delete a book (Admin)
+
+## Swagger Documentation
+
+Swagger is used for API documentation. Once the server is running, you can access the Swagger UI at:
+```bash
+https://book-project-b97u.onrender.com/api-docs/
+```
+
