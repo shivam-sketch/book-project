@@ -49,7 +49,7 @@ npm start
 ```
 
 ## Endpoints
-
+```bash
 Auth
 POST /api/auth/register: Register a new user
 POST /api/auth/login: Login a user and obtain a JWT token
@@ -59,6 +59,7 @@ GET /api/books: Get all books (Admin, Author, Reader)
 GET /api/books/{id}: Get a book by ID (Admin, Author, Reader)
 PUT /api/books/{id}: Update a book (Admin, Author)
 DELETE /api/books/{id}: Delete a book (Admin)
+```
 
 ## Swagger Documentation
 
