@@ -65,8 +65,10 @@ import {
  *     responses:
  *       201:
  *         description: The book was successfully created
- *       400:
+ *       422:
  *         description: Validation error
+ *       403:
+ *         description: Action Forbidden
  *       401:
  *         description: Unauthorized
  *       500:
@@ -120,10 +122,12 @@ import {
  *     responses:
  *       200:
  *         description: The book was successfully updated
- *       400:
+ *       422:
  *         description: Validation error
  *       401:
  *         description: Unauthorized
+ *       403:
+ *         description: Action Forbidden
  *       500:
  *         description: Internal server error
  */
@@ -146,10 +150,12 @@ import {
  *     responses:
  *       200:
  *         description: The book was successfully deleted
- *       400:
+ *       422:
  *         description: Validation error
  *       401:
  *         description: Unauthorized
+ *       403:
+ *         description: Action Forbidden
  *       500:
  *         description: Internal server error
  */
@@ -162,7 +168,7 @@ router
     validate(addBookValidation),
     controller.addBook
   )
-  .get(auth(["Admin", "Author", "Reader"]), controller.getBook)
+  .get(auth(["", "Author", "Reader"]), controller.getBook)
   .put(
     auth(["Admin", "Author"]),
     upload.single("coverPage"),

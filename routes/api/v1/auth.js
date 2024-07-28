@@ -55,7 +55,7 @@ import {
  *     responses:
  *       201:
  *         description: User registered successfully
- *       400:
+ *       422:
  *         description: Validation error
  *       500:
  *         description: Internal server error
@@ -92,7 +92,7 @@ import {
  *               properties:
  *                 token:
  *                   type: string
- *       400:
+ *       422:
  *         description: Validation error
  *       401:
  *         description: Unauthorized
