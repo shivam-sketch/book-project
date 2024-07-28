@@ -25,7 +25,7 @@ A Node.js and Express.js based API for managing books with role-based authentica
     ```
 
 3. Set up environment variables:
-    Create a `.env` file in the root directory and add the following:
+    Create a `.env` file in the root directory and add the following or copy the contents of .env_local:
     ```env
     PRODUCTION_URL=https://book-project-b97u.onrender.com/api/v1/
     PORT=3000
@@ -51,14 +51,13 @@ npm start
 ## Endpoints
 ```bash
 Auth
-POST /api/auth/register: Register a new user
-POST /api/auth/login: Login a user and obtain a JWT token
+POST /api/v1/auth/register: Register a new user
+POST /api/v1/auth/login: Login a user and obtain a JWT token
 Books
-POST /api/books: Add a new book (Admin, Author)
-GET /api/books: Get all books (Admin, Author, Reader)
-GET /api/books/{id}: Get a book by ID (Admin, Author, Reader)
-PUT /api/books/{id}: Update a book (Admin, Author)
-DELETE /api/books/{id}: Delete a book (Admin)
+POST /api/v1/books: Add a new book (Admin, Author)
+GET /api/v1/books: Get all books (Admin, Author, Reader)
+PUT /api/v1/books/: Update a book (Admin, Author)
+DELETE /api/v1/books/: Delete a book (Admin)
 ```
 
 ## Swagger Documentation
