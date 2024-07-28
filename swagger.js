@@ -4,7 +4,7 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Book Management API",
+      title: "Book Management API With Role Based Authentication",
       version: "1.0.0",
     },
     components: {
