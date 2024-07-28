@@ -6,7 +6,7 @@ const registerUserValidation = {
     name: Joi.string().required(),
     email: Joi.string().required(),
     password: Joi.string().required(),
-    role: Joi.string().required(),
+    role: Joi.string().valid("Admin", "Author", "Reader").required(),
   }),
 };
 
@@ -21,23 +21,23 @@ const addBookValidation = {
   body: Joi.object().keys({
     title: Joi.string().required(),
     author: Joi.string().required(),
-    year: Joi.string().required(),
+    year: Joi.number().required(),
   }),
 };
 
 const updateBookValidation = {
   body: Joi.object().keys({
-    id: Joi.string().required(),
+    id: Joi.string().required().custom(isValidObjectId),
     title: Joi.string().optional(),
     author: Joi.string().optional(),
-    year: Joi.string().optional(),
+    year: Joi.number().optional(),
     coverImage: Joi.string().optional(),
   }),
 };
 
 const deleteBookValidation = {
   body: Joi.object().keys({
-    id: Joi.string().required(),
+    id: Joi.string().required().custom(isValidObjectId),
   }),
 };
 

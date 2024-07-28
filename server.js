@@ -11,7 +11,7 @@ import path from "path";
 import debug from "debug";
 import createHttpError from "http-errors";
 const analyze = debug("backend:server");
-
+import swagger from "./swagger.js";
 //App router
 import authRouter from "./routes/api/v1/auth.js";
 import bookRouter from "./routes/api/v1/book.js";
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(cookieParser());
-app.use(logger("dev"));
+app.use(logger(":method :url :status :response-time ms :date"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -60,12 +60,10 @@ server.on("error", onError);
 server.on("listening", onListening);
 
 app.get("/", async (req, res) => {
-  res
-    .status(200)
-    .json({
-      status: true,
-      message: "Server Is Running Now Add /api/v1 to the url",
-    });
+  res.status(200).json({
+    status: true,
+    message: "Server Is Running Now Add /api/v1 to the url",
+  });
 });
 
 app.get("/api/v1", async (req, res) => {
@@ -76,7 +74,8 @@ app.get("/api/v1", async (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/book", bookRouter);
-
+// APi Documentation
+swagger(app);
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -140,3 +139,5 @@ app.use(function (req, res, next) {
 
 // Expection
 app.use(HttpExceptionHandler.handler);
+
+

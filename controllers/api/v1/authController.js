@@ -24,7 +24,7 @@ export async function register(req, res, next) {
            await user.save();
        
            const payload = { user: { id: user._id,email:user.email, role: user.role } };
-           const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+           const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
             return HttpResponse.sendAPIResponse(res, { _id: user._id, name: user.name, email: user.email,role:user.role,token }, HTTP_CREATED, 'User Signup Successful.');
         }
 
@@ -50,7 +50,7 @@ export async function login(req, res, next) {
         console.log(req.body);
         const user = await UserModel.findOne({ email: req.body.email });
         if (!user) {
-            throw new NotFoundError("Invalid credentials!");
+            throw new AuthorizeError("Invalid credentials!");
 
         }
         
@@ -65,7 +65,7 @@ export async function login(req, res, next) {
 
         const payload = { user: { id: user._id,email:user.email, role: user.role } };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
             return HttpResponse.sendAPIResponse(res,{...payload.user,token}, HTTP_OK, 'User Logged In Successfuly.');
 
     } catch (error) {
