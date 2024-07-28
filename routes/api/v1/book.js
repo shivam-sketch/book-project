@@ -168,7 +168,7 @@ router
     validate(addBookValidation),
     controller.addBook
   )
-  .get(auth(["", "Author", "Reader"]), controller.getBook)
+  .get(auth(["Admin", "Author", "Reader"]), controller.getBook)
   .put(
     auth(["Admin", "Author"]),
     upload.single("coverPage"),
