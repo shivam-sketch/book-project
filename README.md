@@ -54,10 +54,10 @@ Auth
 POST /api/v1/auth/register: Register a new user
 POST /api/v1/auth/login: Login a user and obtain a JWT token
 Books
-POST /api/v1/books: Add a new book (Admin, Author)
-GET /api/v1/books: Get all books (Admin, Author, Reader)
-PUT /api/v1/books/: Update a book (Admin, Author)
-DELETE /api/v1/books/: Delete a book (Admin)
+POST /api/v1/book: Add a new book (Admin, Author)
+GET /api/v1/book: Get all books (Admin, Author, Reader)
+PUT /api/v1/book/: Update a book (Admin, Author)
+DELETE /api/v1/book/: Delete a book (Admin)
 ```
 
 ## Swagger Documentation
