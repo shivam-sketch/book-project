@@ -65,6 +65,8 @@ DELETE /api/books/{id}: Delete a book (Admin)
 
 Swagger is used for API documentation. Once the server is running, you can access the Swagger UI at:
 ```bash
+http://localhost:3000/api-docs
+or at Live URL
 https://book-project-b97u.onrender.com/api-docs/
 ```
 
