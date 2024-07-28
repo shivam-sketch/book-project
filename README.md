@@ -25,7 +25,7 @@ A Node.js and Express.js based API for managing books with role-based authentica
     ```
 
 3. Set up environment variables:
-    Create a `.env` file in the root directory and add the following or copy the contents of .env_local:
+    Create a `.env` file in the root directory and add the following or copy the contents of .env_local file :
     ```env
     PRODUCTION_URL=https://book-project-b97u.onrender.com/api/v1/
     PORT=3000
